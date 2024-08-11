@@ -1,3 +1,22 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2015",
+    "module": "es2015",
+    "allowJs": true,
+    "paths": {
+      "@common/*": ["app/common/*"],
+      "@services/*": ["app/services/*"],
+      "@store/*": ["app/store/*"],
+      "@assets/*": ["app/assets/*"],
+      "@navigators/*": ["app/navigators/*"],
+      "@screens/*": ["app/screens/*"],
+      "@components/*": ["app/components/*"],
+      "@utils/*": ["app/utils/*"],
+      "@hooks/*": ["app/hooks/*"],
+      "@slices/*": ["app/slices/*"],
+      "@selectors/*": ["app/selectors/*"]
+    }
+  }
 }
