@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {store, persistor} from './store';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import BootSplash from 'react-native-bootsplash';
+import colors from '@common/colors';
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   provider: {
     flex: 1,
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
 });
 
