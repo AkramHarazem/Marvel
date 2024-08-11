@@ -72,3 +72,9 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Ignore all .env files
+.env*
+
+# Except for .env.example
+!.env.example

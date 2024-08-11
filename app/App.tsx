@@ -61,7 +61,7 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  console.log('babel-plugin-module-resolverbabel-plugin-module-resolver');
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
