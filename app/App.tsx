@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {store, persistor} from './store';
 import {PersistGate} from 'redux-persist/lib/integration/react';
+import BootSplash from 'react-native-bootsplash';
 
 // type SectionProps = PropsWithChildren<{
 //   title: string;
@@ -38,12 +39,15 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 // }
 
 function App(): React.JSX.Element {
+  const hideSplash = () => {
+    BootSplash.hide({fade: true});
+  };
   return (
     <GestureHandlerRootView style={styles.provider}>
       <SafeAreaProvider style={styles.provider}>
         <SafeAreaView style={styles.provider}>
           <Provider store={store}>
-            <PersistGate persistor={persistor}>
+            <PersistGate persistor={persistor} onBeforeLift={hideSplash}>
               <NavigationContainer>
                 <View style={styles.provider}>
                   <Text>Hello Marvel</Text>
