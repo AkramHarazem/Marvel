@@ -60,6 +60,7 @@
     "@react-native/typescript-config": "0.74.87",
     "@types/react": "^18.2.6",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/redux-logger": "^3.0.13",
     "babel-jest": "^29.6.3",
     "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^8.19.0",
