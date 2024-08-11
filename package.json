@@ -14,7 +14,8 @@
     "clean-build": "yarn clean && yarn clean-android && yarn clean-ios",
     "bundle": "cd android && ./gradlew bundleRelease && cd ..",
     "prettier:check": "prettier --check --ignore-path .gitignore .",
-    "prettier:fix": "prettier --write --ignore-path .gitignore ."
+    "prettier:fix": "prettier --write --ignore-path .gitignore .",
+    "link-assets": "react-native-asset"
   },
   "dependencies": {
     "@mahmoudaliibrahim/react-native-loading-view": "^1.2.1",
