@@ -7,7 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "clean": "watchman watch-del-all && rm -rf node_modules && yarn",
+    "clean-android": "cd android && ./gradlew clean && cd ..",
+    "clean-ios": "xattr -w com.apple.xcode.CreatedByBuildSystem true ./ios/build && cd ios && xcodebuild clean && cd ..",
+    "clean-build": "yarn clean && yarn clean-android && yarn clean-ios",
+    "bundle": "cd android && ./gradlew bundleRelease && cd ..",
+    "prettier:check": "prettier --check --ignore-path .gitignore .",
+    "prettier:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "react": "18.2.0",
