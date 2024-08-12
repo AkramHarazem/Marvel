@@ -4,9 +4,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {colors, darkTheme, lightTheme} from '@common/colors';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import {setCurrentTheme} from '@slices/appSettingsSlices';
+import {useTranslation} from 'react-i18next';
+import {languageChangedFunc} from 'app/locales';
 
 const More = () => {
   const dispatch = useDispatch();
+  const {t} = useTranslation();
   const currentTheme = useSelector(getCurrentTheme);
 
   const handleSwitch = (theme: 'dark' | 'light' | 'system') => {
@@ -27,6 +30,10 @@ const More = () => {
     }
   };
 
+  const changeLang = (val: 'en' | 'ar') => {
+    languageChangedFunc(val, dispatch);
+  };
+
   return (
     <View
       style={[
@@ -37,6 +44,11 @@ const More = () => {
       <Button title="Dark Mode" onPress={() => handleSwitch('dark')} />
       <Button title="System Default" onPress={() => handleSwitch('system')} />
       <Text style={[styles.text, {color: currentTheme.textColor}]}>More</Text>
+      <Button title="Arabic" onPress={() => changeLang('ar')} />
+      <Button title="English" onPress={() => changeLang('en')} />
+      <Text style={[styles.text, {color: currentTheme.textColor}]}>
+        {t('welcome_to_react')}
+      </Text>
     </View>
   );
 };

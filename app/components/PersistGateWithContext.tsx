@@ -10,9 +10,13 @@ import RootStack from '@navigators/index';
 import {StatusBar, useColorScheme} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCurrentTheme} from '@selectors/appSettingsSelectors';
+import {
+  getCurrentLanguage,
+  getCurrentTheme,
+} from '@selectors/appSettingsSelectors';
 import {colors, darkTheme, lightTheme} from '@common/colors';
 import {setCurrentTheme} from '@slices/appSettingsSlices';
+import {initI18n} from 'app/locales';
 
 export const PersistGateWithContext = ({
   persistor,
@@ -20,6 +24,7 @@ export const PersistGateWithContext = ({
   const dispatch = useDispatch();
   const colorScheme = useColorScheme();
   const currentTheme = useSelector(getCurrentTheme);
+  const currentLang = useSelector(getCurrentLanguage);
 
   useEffect(() => {
     if (!currentTheme?.theme) {
@@ -55,7 +60,8 @@ export const PersistGateWithContext = ({
 
   const onBeforeLift = useCallback(async () => {
     hideSplash();
-  }, [hideSplash]);
+    initI18n(currentLang);
+  }, [hideSplash, currentLang]);
 
   return (
     <PersistGate

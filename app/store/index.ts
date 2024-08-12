@@ -76,4 +76,7 @@ export const persistor = persistStore(store);
 setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const persist = () => persistor.flush();
+
 export default store;
