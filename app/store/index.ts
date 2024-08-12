@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import {MMKV} from 'react-native-mmkv';
 import logger from 'redux-logger';
+import {appSettingsReduce} from '@slices/appSettingsSlices';
 // import secureStorage from '../common/secureStorage';
 
 const storage = new MMKV();
@@ -46,6 +47,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   api: api.reducer,
+  settings: appSettingsReduce,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -69,8 +71,9 @@ const store = configureStore({
   },
 });
 
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
-export {store, persistor};
+export type RootState = ReturnType<typeof store.getState>;
+export default store;

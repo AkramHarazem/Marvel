@@ -18,9 +18,20 @@ const colorWithAlpha = (
   return THEME_COLORS[name].split(', 1)').join(`, ${opacity})`);
 };
 
-const colors = {
+export const colors = {
   ...THEME_COLORS,
   colorWithAlpha,
 };
 
-export default colors;
+export const lightTheme = {
+  containerBackgroundColor: 'rgba(245, 245, 245, 1)',
+  containerViewColor: 'rgba(0, 0, 0, 1)',
+  textColor: 'rgba(0, 0, 0, 1)',
+  switchButtonBackgroundColor: '#ccc',
+};
+export const darkTheme = {
+  containerBackgroundColor: 'rgba(33, 36, 39, 1)',
+  containerViewColor: 'rgba(245, 245, 245, 1)',
+  textColor: 'rgba(245, 245, 245, 1)',
+  switchButtonBackgroundColor: '#ccc',
+};
