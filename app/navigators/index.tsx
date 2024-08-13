@@ -7,7 +7,12 @@ import AppStack from './AppStack';
 const Stack = createNativeStackNavigator();
 const RootStack = () => {
   return (
-    <Stack.Navigator initialRouteName={screenNames.RootStack.AppStack}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        navigationBarHidden: true,
+      }}
+      initialRouteName={screenNames.RootStack.AuthStack}>
       <Stack.Screen
         name={screenNames.RootStack.AuthStack}
         component={AuthStack}

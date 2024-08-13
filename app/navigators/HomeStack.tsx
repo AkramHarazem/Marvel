@@ -6,7 +6,16 @@ import screenNames from '@common/screensConfig';
 const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName={screenNames.HomeStack.Home}>
+    <Stack.Navigator
+      screenOptions={
+        {
+          // headerShown: false,
+          // navigationBarHidden: true,
+          // headerTintColor: 'black',
+          // headerStyle: {backgroundColor: 'tomato'},
+        }
+      }
+      initialRouteName={screenNames.HomeStack.Home}>
       <Stack.Screen name={screenNames.HomeStack.Home} component={Home} />
     </Stack.Navigator>
   );

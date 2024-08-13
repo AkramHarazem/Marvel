@@ -6,7 +6,11 @@ import {Login} from '@screens/auth';
 const Stack = createNativeStackNavigator();
 const AuthStack = () => {
   return (
-    <Stack.Navigator initialRouteName={screenNames.AuthStack.Login}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={screenNames.AuthStack.Login}>
       <Stack.Screen name={screenNames.AuthStack.Login} component={Login} />
     </Stack.Navigator>
   );

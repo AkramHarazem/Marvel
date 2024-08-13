@@ -8,11 +8,11 @@ const screenNames = {
   },
   AppStack: {
     HomeStack: 'HomeStack',
-    ProfileStack: 'AccountStack',
-    MoreStack: 'OrdersStack',
+    ProfileStack: 'ProfileStack',
+    MoreStack: 'MoreStack',
   },
   HomeStack: {
-    Home: 'home',
+    Home: 'Home',
   },
   ProfileStack: {
     Profile: 'Profile',
