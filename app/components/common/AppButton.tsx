@@ -27,7 +27,6 @@ export type AppButtonProps = TouchableOpacityProps & {
   isLoading?: boolean;
   textStyle?: TextProps['style'];
   underline?: boolean;
-  shouldTranslate?: boolean;
 };
 
 function AppButton({
@@ -39,7 +38,6 @@ function AppButton({
   underline = false,
   disabled = false,
   activeOpacity = 0.5,
-  shouldTranslate,
   children,
 }: AppButtonProps) {
   return (
@@ -61,8 +59,7 @@ function AppButton({
             styles[`${type}Txt`] || styles.btnTxt,
             textStyle,
             underline && styles.underline,
-          ]}
-          shouldTranslate={shouldTranslate}>
+          ]}>
           {children}
         </AppText>
       )}

@@ -56,7 +56,7 @@ export const languageChangedFunc = async (
     I18nManager.allowRTL(isRTL(language));
     await persist();
     setTimeout(() => {
-      RNRestart.Restart();
+      RNRestart.restart();
     }, 200);
   }
 };

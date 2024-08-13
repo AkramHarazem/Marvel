@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, TextInput, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {Controller, FieldValues, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
@@ -14,8 +14,12 @@ import AppTextInput from '@components/common/AppTexTInput';
 import {AppButton, AppText} from '@components/common';
 import {BUTTON_TYPES} from '@components/common/AppButton';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
+import {LoginCarousel} from '@components/auth';
+import {useNavigation} from '@react-navigation/native';
+import screenNames from '@common/screensConfig';
+import {setToken} from '@slices/authSlices';
 
 const Login = () => {
   const {t} = useTranslation();
@@ -24,6 +28,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState('');
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -44,13 +50,19 @@ const Login = () => {
   }
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
-    await sleep(2000);
+    await sleep(2000); //simulate login api
     if (
-      (data?.userName === 'akram' || data?.userName === 'Akram') &&
-      data?.password === 'Akram@123'
+      (data?.userName.trim() === 'akram' ||
+        data?.userName.trim() === 'Akram') &&
+      data?.password.trim() === 'Akram@123'
     ) {
       reset();
       setError('');
+      dispatch(setToken('marvel123456789'));
+      navigation.reset({
+        index: 0,
+        routes: [{name: screenNames.RootStack.AppStack}],
+      });
     } else {
       setError('invalid_username_or_password');
     }
@@ -60,21 +72,24 @@ const Login = () => {
   const onFocus = () => {
     setError('');
   };
-  console.log(
-    'containerBackgroundColor',
-    currentTheme.containerBackgroundColor,
-  );
+
   return (
-    <ScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={[
-        styles.container,
-        {
-          backgroundColor: currentTheme.containerBackgroundColor,
-          paddingBottom: insets.bottom + moderateVerticalScale(16),
-        },
-      ]}>
-      <View style={[styles.alignCenter]}>
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior="position"
+      contentContainerStyle={{
+        flex: 1,
+      }}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={[
+          styles.container,
+          {
+            backgroundColor: currentTheme.containerBackgroundColor,
+            paddingBottom: insets.bottom + moderateVerticalScale(16),
+          },
+        ]}>
+        <LoginCarousel />
         <View style={styles.btnInputContainer}>
           <Controller
             control={control}
@@ -132,22 +147,16 @@ const Login = () => {
             login
           </AppButton>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 export default Login;
 const styles = StyleSheet.create({
   container: {
-    paddingTop: moderateVerticalScale(48),
-    paddingBottom: moderateVerticalScale(16),
+    paddingVertical: moderateVerticalScale(30),
     paddingHorizontal: moderateScale(24),
-    justifyContent: 'space-between',
     flex: 1,
-  },
-  alignCenter: {
-    alignItems: 'center',
-    width: '100%',
   },
   row: {
     flexDirection: 'row',
@@ -160,6 +169,7 @@ const styles = StyleSheet.create({
   },
   btnInputContainer: {
     gap: moderateVerticalScale(16),
+    alignItems: 'center',
     width: '100%',
   },
   errorTxt: {

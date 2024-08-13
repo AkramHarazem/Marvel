@@ -6,11 +6,15 @@ import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import {setCurrentTheme} from '@slices/appSettingsSlices';
 import {useTranslation} from 'react-i18next';
 import {languageChangedFunc} from 'app/locales';
+import {resetToken} from '@slices/authSlices';
+import {useNavigation} from '@react-navigation/native';
+import screenNames from '@common/screensConfig';
 
 const More = () => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const currentTheme = useSelector(getCurrentTheme);
+  const navigation = useNavigation();
 
   const handleSwitch = (theme: 'dark' | 'light' | 'system') => {
     switch (theme) {
@@ -34,6 +38,14 @@ const More = () => {
     languageChangedFunc(val, dispatch);
   };
 
+  const handleLogOut = () => {
+    dispatch(resetToken());
+    navigation.reset({
+      index: 0,
+      routes: [{name: screenNames.RootStack.AuthStack}],
+    });
+  };
+
   return (
     <View
       style={[
@@ -49,6 +61,7 @@ const More = () => {
       <Text style={[styles.text, {color: currentTheme.textColor}]}>
         {t('welcome_to_react')}
       </Text>
+      <Button title="sign out" onPress={handleLogOut} />
     </View>
   );
 };

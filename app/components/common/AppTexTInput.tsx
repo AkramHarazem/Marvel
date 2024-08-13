@@ -99,7 +99,9 @@ const AppTextInput = React.forwardRef(
         style={containerStyle}>
         <View style={styles.labelContainer}>
           {label.length !== 0 ? (
-            <AppText style={styles.label}>{label}</AppText>
+            <AppText style={[styles.label, {color: currentTheme.textColor}]}>
+              {label}
+            </AppText>
           ) : null}
           {labelIcon ? (
             <AppIcon

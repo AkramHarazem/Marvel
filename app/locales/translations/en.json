@@ -10,5 +10,6 @@
     "enter_your_user_name": "Enter your username",
     "user_name_is_required": "Username is required",
     "login": "Login",
-    "invalid_username_or_password":"Invalid username or password"
+    "invalid_username_or_password":"Invalid username or password",
+    "login_to_see_your_favorites_heros":"Login to see your favorites heros"
 }

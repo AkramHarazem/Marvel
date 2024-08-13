@@ -14,7 +14,8 @@ import {
 import {MMKV} from 'react-native-mmkv';
 import logger from 'redux-logger';
 import {appSettingsReduce} from '@slices/appSettingsSlices';
-// import secureStorage from '../common/secureStorage';
+import secureStorage from '../common/secureStorage';
+import {tokenReducer} from '@slices/authSlices';
 
 const storage = new MMKV();
 
@@ -38,16 +39,17 @@ const persistConfig = {
   storage: reduxStorage,
 };
 
-// const authPersistConfig = {
-//   key: 'auth',
-//   storage: secureStorage,
-//   whitelist: ['token'],
-//   throttle: 30,
-// };
+const authPersistConfig = {
+  key: 'auth',
+  storage: secureStorage,
+  whitelist: ['token'],
+  throttle: 30,
+};
 
 const reducers = combineReducers({
   api: api.reducer,
   settings: appSettingsReduce,
+  token: persistReducer(authPersistConfig, tokenReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

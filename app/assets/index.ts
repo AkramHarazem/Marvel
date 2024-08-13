@@ -1,3 +1,18 @@
 module.exports = {
   logo: require('./images/logo.png'),
+  home: require('./images/home.png'),
+  profile: require('./images/profile.png'),
+  more: require('./images/more.png'),
+  close: require('./images/close.png'),
+  eye: require('./images/eye.png'),
+  eye_off: require('./images/eye_off.png'),
+  antMan: require('./images/antMan.jpeg'),
+  captain: require('./images/captain.jpeg'),
+  hulk: require('./images/hulk.jpg'),
+  ironMan: require('./images/ironMan.jpeg'),
+  panther: require('./images/panther.jpeg'),
+  spider: require('./images/spider.jpeg'),
+  thor: require('./images/thor.jpg'),
+  widow: require('./images/widow.jpg'),
+  strange: require('./images/strange.jpeg'),
 };

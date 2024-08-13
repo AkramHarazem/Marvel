@@ -10,6 +10,7 @@
     "enter_your_user_name": "ادخل اسم المستخدم",
     "user_name_is_required": "اسم المستخدم مطلوب",
     "login": "تسجيل دخول",
-    "invalid_username_or_password": "اسم المستخدم أو كلمة المرور غير صحيحة"
+    "invalid_username_or_password": "اسم المستخدم أو كلمة المرور غير صحيحة",
+    "login_to_see_your_favorites_heros": "قم بتسجيل الدخول لمشاهدة الأبطال المفضلين لديك"
 }
   
