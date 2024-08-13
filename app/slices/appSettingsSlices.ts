@@ -10,6 +10,7 @@ type SettingsState = {
     containerViewColor?: string;
     textColor?: string;
     switchButtonBackgroundColor?: string;
+    focusInput?: string;
   };
   language: SupportedLanguage;
 };

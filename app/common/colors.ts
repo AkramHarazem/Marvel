@@ -1,7 +1,11 @@
 const APP_COLORS = {
-  red: 'rgba(203, 20, 46, 1)',
+  red: 'rgba(236, 28, 36, 1)',
   white: 'rgba(255, 255, 255, 1)',
   black: 'rgba(0, 0, 0, 1)',
+  gray: 'rgba(108, 108, 113, 1)',
+  lightGray: 'rgba(181, 181, 181, 1)',
+  lighterGray: 'rgba(200, 200, 200, 1)',
+  error: 'rgba(216, 3, 3, 1)',
 };
 
 const THEME_COLORS = {
@@ -24,14 +28,16 @@ export const colors = {
 };
 
 export const lightTheme = {
-  containerBackgroundColor: 'rgba(245, 245, 245, 1)',
+  containerBackgroundColor: 'rgba(255, 255, 255, 1)',
   containerViewColor: 'rgba(0, 0, 0, 1)',
   textColor: 'rgba(0, 0, 0, 1)',
   switchButtonBackgroundColor: '#ccc',
+  focusInput: 'rgba(0, 0, 0, 1)',
 };
 export const darkTheme = {
-  containerBackgroundColor: 'rgba(33, 36, 39, 1)',
-  containerViewColor: 'rgba(245, 245, 245, 1)',
-  textColor: 'rgba(245, 245, 245, 1)',
+  containerBackgroundColor: 'rgba(0, 0, 0, 1)',
+  containerViewColor: 'rgba(255, 255, 255, 1)',
+  textColor: 'rgba(255, 255, 255, 1)',
   switchButtonBackgroundColor: '#ccc',
+  focusInput: 'rgba(255, 255, 255, 1)',
 };
