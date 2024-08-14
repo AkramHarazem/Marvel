@@ -44,7 +44,7 @@ const resources: {[key in SupportedLanguage]: Resource} = {
 };
 
 export const languageChangedFunc = async (
-  language: SupportedLanguage,
+  language: string,
   dispatch: AppDispatch,
 ) => {
   if (i18n.language === language) {
@@ -61,7 +61,7 @@ export const languageChangedFunc = async (
   }
 };
 
-export const initI18n = (lng: SupportedLanguage) => {
+export const initI18n = (lng: string) => {
   i18n.use(initReactI18next).init({
     lng,
     resources,

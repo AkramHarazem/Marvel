@@ -41,14 +41,14 @@ export const PersistGateWithContext = ({
   }, [currentTheme, colorScheme, dispatch]);
 
   useEffect(() => {
-    const statusBarColor =
-      (currentTheme?.theme || colorScheme) === 'dark'
-        ? colors.black
-        : colors.white;
-    const barStyle =
-      (currentTheme?.theme || colorScheme) === 'dark'
-        ? 'light-content'
-        : 'dark-content';
+    const statusBarColor = (currentTheme?.theme || colorScheme)?.includes(
+      'dark',
+    )
+      ? colors.black
+      : colors.white;
+    const barStyle = (currentTheme?.theme || colorScheme)?.includes('dark')
+      ? 'light-content'
+      : 'dark-content';
 
     StatusBar.setBackgroundColor(statusBarColor);
     StatusBar.setBarStyle(barStyle);
@@ -70,7 +70,7 @@ export const PersistGateWithContext = ({
       onBeforeLift={onBeforeLift}>
       <NavigationContainer
         theme={
-          (currentTheme?.theme || colorScheme) === 'dark'
+          (currentTheme?.theme || colorScheme)?.includes('dark')
             ? DarkTheme
             : DefaultTheme
         }>

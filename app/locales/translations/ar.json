@@ -11,6 +11,14 @@
     "user_name_is_required": "اسم المستخدم مطلوب",
     "login": "تسجيل دخول",
     "invalid_username_or_password": "اسم المستخدم أو كلمة المرور غير صحيحة",
-    "login_to_see_your_favorites_heros": "قم بتسجيل الدخول لمشاهدة الأبطال المفضلين لديك"
+    "login_to_see_your_favorites_heros": "قم بتسجيل الدخول لمشاهدة الأبطال المفضلين لديك",
+    "language": "اللغة",
+    "theme": "السمة",
+    "sign_out": "تسجيل الخروج",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system_default": "إعداد النظام",
+    "en": "English",
+    "ar": "العربية"
 }
   

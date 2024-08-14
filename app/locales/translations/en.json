@@ -11,5 +11,13 @@
     "user_name_is_required": "Username is required",
     "login": "Login",
     "invalid_username_or_password":"Invalid username or password",
-    "login_to_see_your_favorites_heros":"Login to see your favorites heros"
+    "login_to_see_your_favorites_heros":"Login to see your favorites heros",
+    "language":"Language",
+    "theme":"Theme",
+    "sign_out":"Sign out",
+    "light":"Light",
+    "dark":"Dark",
+    "system_default":"System Default",
+    "en":"English",
+    "ar":"العربية"
 }

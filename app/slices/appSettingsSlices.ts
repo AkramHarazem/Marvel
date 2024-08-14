@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {detectDeviceLanguage, SupportedLanguage} from 'app/locales';
+import {detectDeviceLanguage} from 'app/locales';
 import {PURGE} from 'redux-persist';
 
 type SettingsState = {
@@ -11,8 +11,9 @@ type SettingsState = {
     textColor?: string;
     switchButtonBackgroundColor?: string;
     focusInput?: string;
+    system?: boolean;
   };
-  language: SupportedLanguage;
+  language: string;
 };
 
 const initialState: SettingsState = {
@@ -24,7 +25,7 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    languageChanged(state, action: PayloadAction<SupportedLanguage>) {
+    languageChanged(state, action: PayloadAction<string>) {
       state.language = action.payload;
     },
     setCurrentTheme(state, action: PayloadAction<object>) {

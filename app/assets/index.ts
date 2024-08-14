@@ -15,4 +15,7 @@ module.exports = {
   thor: require('./images/thor.jpg'),
   widow: require('./images/widow.jpg'),
   strange: require('./images/strange.jpeg'),
+  login: require('./images/login.png'),
+  language: require('./images/language.png'),
+  theme: require('./images/theme.png'),
 };

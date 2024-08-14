@@ -23,7 +23,6 @@ import typo from '@common/typo';
 import {eye, eye_off, close} from '@assets';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
-import AppIcon from './AppIcon';
 
 export type InputProps = {
   onChangeText: any;
@@ -35,11 +34,8 @@ export type InputProps = {
   editable?: boolean;
   onPress?: any;
   icon?: ImageSourcePropType;
-  onIconPress?: () => void;
   preText?: string;
   label?: string;
-  labelIcon?: ImageSourcePropType;
-  onLabelIconPress?: () => void;
   isBottomSheet?: boolean;
 } & TextInputProps;
 
@@ -53,8 +49,6 @@ const AppTextInput = React.forwardRef(
       containerStyle = {},
       onPress,
       label = '',
-      labelIcon,
-      onLabelIconPress,
       secureTextEntry,
       onChangeText,
       value = '',
@@ -102,15 +96,6 @@ const AppTextInput = React.forwardRef(
             <AppText style={[styles.label, {color: currentTheme.textColor}]}>
               {label}
             </AppText>
-          ) : null}
-          {labelIcon ? (
-            <AppIcon
-              style={styles.labelIcon}
-              icon={labelIcon}
-              onPress={onLabelIconPress}
-              shouldReverse={true}
-              disabled={false}
-            />
           ) : null}
         </View>
         <View style={[styles.container, {borderColor: getBorderColor()}]}>
@@ -208,10 +193,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: moderateVerticalScale(4),
-  },
-  labelIcon: {
-    resizeMode: 'contain',
-    width: moderateScale(25),
-    height: moderateVerticalScale(25),
   },
 });
