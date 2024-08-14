@@ -1,20 +1,8 @@
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  Appearance,
-} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
-import React, {Dispatch, SetStateAction, useCallback, useMemo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {setCurrentTheme} from '@slices/appSettingsSlices';
-import {colors, darkTheme, lightTheme} from '@common/colors';
-import {
-  getCurrentLanguage,
-  getCurrentTheme,
-} from '@selectors/appSettingsSelectors';
-import {languageChangedFunc} from 'app/locales';
+import React, {Dispatch, SetStateAction} from 'react';
+import {useSelector} from 'react-redux';
+import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import RadioButton from './RadioButton';
 import AppText from './AppText';
 import {
@@ -28,76 +16,19 @@ type ModalProps = {
   setModalVisible: Dispatch<SetStateAction<boolean>>;
   optionsName?: string;
   modalVisible?: boolean;
+  options: Array<string>;
+  handlePress: (arg: string) => void;
+  selectedOption?: string;
 };
-const themeOptions = ['light', 'dark', 'system_default'];
-const languageOptions = ['en', 'ar'];
 
 const OptionsModal = ({
   modalVisible,
   setModalVisible,
-  optionsName,
+  options,
+  handlePress,
+  selectedOption,
 }: ModalProps) => {
-  const dispatch = useDispatch();
   const currentTheme = useSelector(getCurrentTheme);
-  const language = useSelector(getCurrentLanguage);
-  const options = optionsName === 'theme' ? themeOptions : languageOptions;
-
-  const selectedOption = useMemo(
-    () =>
-      optionsName === 'theme'
-        ? currentTheme?.system
-          ? 'system_default'
-          : currentTheme.theme
-        : language,
-    [optionsName, language, currentTheme],
-  );
-
-  const handleSwitch = useCallback((theme: string) => {
-    const colorScheme = Appearance.getColorScheme();
-    switch (theme) {
-      case 'dark':
-        dispatch(setCurrentTheme({...darkTheme, theme: 'dark'}));
-        StatusBar.setBarStyle('light-content');
-        StatusBar.setBackgroundColor(colors.black);
-        break;
-      case 'light':
-        dispatch(setCurrentTheme({...lightTheme, theme: 'light'}));
-        StatusBar.setBarStyle('dark-content');
-        StatusBar.setBackgroundColor(colors.white);
-        break;
-      case 'system_default':
-        dispatch(
-          setCurrentTheme(
-            colorScheme === 'light'
-              ? {...lightTheme, theme: 'light', system: true}
-              : {...darkTheme, theme: 'dark', system: true},
-          ),
-        );
-        StatusBar.setBarStyle(
-          colorScheme === 'light' ? 'dark-content' : 'light-content',
-        );
-        StatusBar.setBackgroundColor(
-          colorScheme === 'light' ? colors.white : colors.black,
-        );
-        break;
-    }
-  }, []);
-
-  const changeLang = useCallback((val: string) => {
-    languageChangedFunc(val, dispatch);
-  }, []);
-
-  const handlePress = useCallback(
-    (option: string) => {
-      if (optionsName === 'theme') {
-        handleSwitch(option);
-      } else {
-        changeLang(option);
-      }
-      setModalVisible(!modalVisible);
-    },
-    [optionsName, modalVisible, handleSwitch, changeLang, setModalVisible],
-  );
 
   return (
     <Modal
@@ -115,8 +46,9 @@ const OptionsModal = ({
           styles.modalView,
           {backgroundColor: currentTheme.tabBackground},
         ]}>
-        {options.map(item => (
+        {options.map((item, idx) => (
           <TouchableOpacity
+            key={idx}
             style={styles.itemContainer}
             onPress={() => handlePress(item)}>
             <RadioButton selected={item === selectedOption} />

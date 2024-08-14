@@ -34,7 +34,7 @@ export const PersistGateWithContext = ({
       const barStyle =
         colorScheme === 'dark' ? 'light-content' : 'dark-content';
 
-      dispatch(setCurrentTheme(theme));
+      dispatch(setCurrentTheme({...theme, theme: colorScheme, system: true}));
       StatusBar.setBackgroundColor(statusBarColor);
       StatusBar.setBarStyle(barStyle);
     }

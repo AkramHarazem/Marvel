@@ -11,6 +11,8 @@ type SettingsState = {
     textColor?: string;
     switchButtonBackgroundColor?: string;
     focusInput?: string;
+    headerBackground?: string;
+    tabBackground?: string;
     system?: boolean;
   };
   language: string;

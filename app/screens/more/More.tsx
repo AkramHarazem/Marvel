@@ -14,6 +14,7 @@ import {
   moderateVerticalScale,
 } from 'react-native-size-matters/extend';
 import {OptionsModal} from '@components/common';
+import useHandleAppSettings from '@hooks/useHandleAppSettings';
 
 const More = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,12 @@ const More = () => {
   const isLoggedIn = useSelector(getToken);
   const [modalVisible, setModalVisible] = useState(false);
   const [optionsName, setOptionsName] = useState<string>('');
+
+  const {options, handlePress, selectedOption} = useHandleAppSettings({
+    optionsName,
+    setModalVisible,
+    modalVisible,
+  });
 
   const handleLogOut = useCallback(() => {
     dispatch(resetToken());
@@ -72,7 +79,9 @@ const More = () => {
       <OptionsModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        optionsName={optionsName}
+        options={options}
+        handlePress={handlePress}
+        selectedOption={selectedOption}
       />
     </ScrollView>
   );
