@@ -1,4 +1,10 @@
-import {KeyboardAvoidingView, StyleSheet, TextInput, View} from 'react-native';
+import {
+  Image,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import {Controller, FieldValues, useForm} from 'react-hook-form';
 import {useTranslation} from 'react-i18next';
@@ -20,6 +26,7 @@ import {LoginCarousel} from '@components/auth';
 import {useNavigation} from '@react-navigation/native';
 import screenNames from '@common/screensConfig';
 import {setToken} from '@slices/authSlices';
+import {logo} from '@assets';
 
 const Login = () => {
   const {t} = useTranslation();
@@ -89,6 +96,12 @@ const Login = () => {
             paddingBottom: insets.bottom + moderateVerticalScale(16),
           },
         ]}>
+        <View style={styles.logoContainer}>
+          <Image style={styles.logoStyle} source={logo} />
+        </View>
+        <AppText style={styles.txtStyle}>
+          login_to_see_your_favorites_heros
+        </AppText>
         <LoginCarousel />
         <View style={styles.btnInputContainer}>
           <Controller
@@ -154,18 +167,27 @@ const Login = () => {
 export default Login;
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: moderateVerticalScale(30),
+    paddingVertical: moderateVerticalScale(55),
     paddingHorizontal: moderateScale(24),
     flex: 1,
+    gap: moderateVerticalScale(14),
   },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+  logoContainer: {
+    width: moderateScale(200),
+    height: moderateScale(80),
+    alignSelf: 'center',
   },
-  txtContainer: {
-    gap: moderateVerticalScale(8),
-    marginVertical: moderateVerticalScale(32),
+  logoStyle: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  txtStyle: {
+    fontFamily: typo.semiBold,
+    fontSize: fontSizes[22],
+    textAlign: 'center',
+    maxWidth: moderateScale(250),
+    alignSelf: 'center',
   },
   btnInputContainer: {
     gap: moderateVerticalScale(16),

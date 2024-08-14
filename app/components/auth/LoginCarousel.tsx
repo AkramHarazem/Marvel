@@ -45,9 +45,6 @@ const LoginCarousel = () => {
   }
   return (
     <View style={StyleSheet.flatten([styles.container])}>
-      <AppText style={styles.txrStyle}>
-        login_to_see_your_favorites_heros
-      </AppText>
       <Carousel
         ref={carouselRef}
         data={slides}
@@ -71,8 +68,6 @@ export default LoginCarousel;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginBottom: moderateVerticalScale(20),
-    gap: moderateVerticalScale(20),
   },
   slide: {
     alignSelf: 'center',
@@ -83,11 +78,5 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-  },
-  txrStyle: {
-    fontFamily: typo.semiBold,
-    fontSize: fontSizes[22],
-    textAlign: 'center',
-    maxWidth: moderateScale(250),
   },
 });
