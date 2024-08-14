@@ -18,4 +18,9 @@ module.exports = {
   login: require('./images/login.png'),
   language: require('./images/language.png'),
   theme: require('./images/theme.png'),
+  avatar: require('./images/avatar.png'),
+  editing: require('./images/editing.png'),
+  phone: require('./images/phone.png'),
+  email: require('./images/email.png'),
+  idCard: require('./images/idCard.png'),
 };

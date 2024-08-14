@@ -27,10 +27,13 @@ import {useNavigation} from '@react-navigation/native';
 import screenNames from '@common/screensConfig';
 import {setToken} from '@slices/authSlices';
 import {logo} from '@assets';
+import {setUserInfo} from '@slices/userInfoSlices';
+import {getUserInfo} from '@selectors/userInfoSelectors';
 
 const Login = () => {
   const {t} = useTranslation();
   const currentTheme = useSelector(getCurrentTheme);
+  const userInfo = useSelector(getUserInfo);
   const passwordRef = useRef<TextInput>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState('');
@@ -59,13 +62,21 @@ const Login = () => {
     setIsLoading(true);
     await sleep(2000); //simulate login api
     if (
-      (data?.userName.trim() === 'akram' ||
-        data?.userName.trim() === 'Akram') &&
+      data?.userName.trim() === 'Akram' &&
       data?.password.trim() === 'Akram@123'
     ) {
       reset();
       setError('');
       dispatch(setToken('marvel123456789'));
+      if (!userInfo?.name) {
+        dispatch(
+          setUserInfo({
+            name: data?.userName.trim(),
+            email: 'akram@gmail.com',
+            phone: '201112590070',
+          }),
+        );
+      }
       navigation.reset({
         index: 0,
         routes: [{name: screenNames.RootStack.AppStack}],

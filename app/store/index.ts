@@ -16,6 +16,7 @@ import logger from 'redux-logger';
 import {appSettingsReduce} from '@slices/appSettingsSlices';
 import secureStorage from '../common/secureStorage';
 import {tokenReducer} from '@slices/authSlices';
+import {userInfoReducer} from '@slices/userInfoSlices';
 
 const storage = new MMKV();
 
@@ -37,6 +38,7 @@ export const reduxStorage = {
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
+  whitelist: ['settings', 'token', 'userInfo'],
 };
 
 const authPersistConfig = {
@@ -50,6 +52,7 @@ const reducers = combineReducers({
   api: api.reducer,
   settings: appSettingsReduce,
   token: persistReducer(authPersistConfig, tokenReducer),
+  userInfo: userInfoReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

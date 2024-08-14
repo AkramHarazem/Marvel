@@ -19,6 +19,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@bam.tech/react-native-image-resizer": "^3.0.10",
     "@mahmoudaliibrahim/react-native-loading-view": "^1.2.1",
     "@react-native-community/hooks": "^3.0.0",
     "@react-native-community/netinfo": "^11.3.2",
@@ -43,6 +44,8 @@
     "react-native-flipper": "^0.212.0",
     "react-native-gesture-handler": "^2.18.1",
     "react-native-haptic-feedback": "^2.3.1",
+    "react-native-image-base64": "^0.1.4",
+    "react-native-image-picker": "^7.1.2",
     "react-native-mmkv": "^2.12.2",
     "react-native-modal": "^13.0.1",
     "react-native-pager-view": "^6.3.3",

@@ -21,16 +21,23 @@ type MoreButtonProps = {
   image?: ImageSourcePropType;
   label?: string;
   onPress?: any;
+  disabled?: boolean;
 };
 
-const MoreButton = ({image, label, onPress = () => {}}: MoreButtonProps) => {
+const MoreButton = ({
+  image,
+  label,
+  onPress = () => {},
+  disabled = false,
+}: MoreButtonProps) => {
   const currentTheme = useSelector(getCurrentTheme);
 
   return (
     <TouchableOpacity
       style={[styles.container, {backgroundColor: currentTheme.tabBackground}]}
       activeOpacity={0.7}
-      onPress={onPress}>
+      onPress={onPress}
+      disabled={disabled}>
       <View style={styles.row}>
         <Image
           source={image}
@@ -39,7 +46,9 @@ const MoreButton = ({image, label, onPress = () => {}}: MoreButtonProps) => {
         />
         <AppText style={styles.label}>{label}</AppText>
       </View>
-      <AppIcon icon={'chevron-right'} shouldReverse={true} disabled={true} />
+      {!disabled ? (
+        <AppIcon icon={'chevron-right'} shouldReverse={true} disabled={true} />
+      ) : null}
     </TouchableOpacity>
   );
 };

@@ -1655,6 +1655,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bam.tech/react-native-image-resizer@npm:^3.0.10":
+  version: 3.0.10
+  resolution: "@bam.tech/react-native-image-resizer@npm:3.0.10"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 34cb129d421939ae2937f876986088a5ff25480a008f17c17651bae16e8a4a87882f0803137221d3e28423f343e77008cfb10062bf171db1bc230678b57d865e
+  languageName: node
+  linkType: hard
+
 "@bcoe/v8-coverage@npm:^0.2.3":
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"
@@ -3296,6 +3306,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@bam.tech/react-native-image-resizer": ^3.0.10
     "@mahmoudaliibrahim/react-native-loading-view": ^1.2.1
     "@react-native-community/hooks": ^3.0.0
     "@react-native-community/netinfo": ^11.3.2
@@ -3332,6 +3343,8 @@ __metadata:
     react-native-flipper: ^0.212.0
     react-native-gesture-handler: ^2.18.1
     react-native-haptic-feedback: ^2.3.1
+    react-native-image-base64: ^0.1.4
+    react-native-image-picker: ^7.1.2
     react-native-mmkv: ^2.12.2
     react-native-modal: ^13.0.1
     react-native-pager-view: ^6.3.3
@@ -9171,6 +9184,23 @@ __metadata:
   peerDependencies:
     react-native: ">=0.60.0"
   checksum: 2d6e39f59431150ffc350f79a8814d9d549b2b08cadec3f4e4b597893c1fcd158c794a7a48019d7eb32cf37ce6dfdea6b9a9f585e41d3f7fc464fd159ee91ca6
+  languageName: node
+  linkType: hard
+
+"react-native-image-base64@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "react-native-image-base64@npm:0.1.4"
+  checksum: 31e4272effbd78a4eb3a6d013d258945698566034b327b5eaf5531d9baae7a2e9a885862573e441bf38137a58309f05101a3481668d6eb77650e8daad8211a1c
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "react-native-image-picker@npm:7.1.2"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: af52328b7cb06c28549442f0d923cfa92dde8d5a968a642336df4c882f81adbf0e5e606a14de27f96883a76fa1e03230061c4080011c9107942edebc8e09c478
   languageName: node
   linkType: hard
 

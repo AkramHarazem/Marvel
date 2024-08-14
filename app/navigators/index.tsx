@@ -13,7 +13,7 @@ const RootStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        navigationBarHidden: true,
+        // navigationBarHidden: true,
       }}
       initialRouteName={
         isLoggedIn
