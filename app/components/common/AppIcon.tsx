@@ -8,9 +8,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {moderateScale} from 'react-native-size-matters/extend';
+import {useSelector} from 'react-redux';
+import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 
 type AppIconProps = {
-  icon: ImageSourcePropType;
+  image?: ImageSourcePropType;
+  icon?: string;
   onPress?: any;
   style?: ImageStyle;
   shouldReverse?: boolean;
@@ -18,6 +23,7 @@ type AppIconProps = {
 };
 
 const AppIcon = ({
+  image,
   icon,
   onPress,
   style,
@@ -25,13 +31,24 @@ const AppIcon = ({
   disabled = true,
 }: AppIconProps) => {
   const {goBack} = useNavigation();
+  const currentTheme = useSelector(getCurrentTheme);
 
   return (
     <TouchableOpacity
       onPress={onPress ? onPress : goBack}
-      style={styles.container}
+      style={[styles.container, shouldReverse && styles.reverse]}
       disabled={disabled}>
-      <Image source={icon} style={[style, shouldReverse && styles.reverse]} />
+      {image ? (
+        <Image source={image} style={style} />
+      ) : (
+        icon && (
+          <Icon
+            name={icon}
+            size={moderateScale(22, 0.3)}
+            color={currentTheme.textColor}
+          />
+        )
+      )}
     </TouchableOpacity>
   );
 };

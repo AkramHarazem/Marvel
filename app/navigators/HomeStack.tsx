@@ -7,14 +7,9 @@ const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={
-        {
-          // headerShown: false,
-          // navigationBarHidden: true,
-          // headerTintColor: 'black',
-          // headerStyle: {backgroundColor: 'tomato'},
-        }
-      }
+      screenOptions={{
+        headerShown: false,
+      }}
       initialRouteName={screenNames.HomeStack.Home}>
       <Stack.Screen name={screenNames.HomeStack.Home} component={Home} />
     </Stack.Navigator>

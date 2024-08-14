@@ -2,7 +2,6 @@ import {
   AccessibilityState,
   Image,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -17,6 +16,8 @@ import {
 } from 'react-native-size-matters/extend';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
+import AppText from './AppText';
+import typo from '@common/typo';
 
 interface TabButtonProps {
   name: string;
@@ -64,15 +65,7 @@ const TabButton = (props: TabButtonProps) => {
             tintColor={currentTheme.textColor}
           />
           <Animatable.View ref={textViewRef} duration={500}>
-            {focused && (
-              <Text
-                style={{
-                  color: currentTheme.textColor,
-                  paddingHorizontal: moderateScale(8),
-                }}>
-                {t(name)}
-              </Text>
-            )}
+            {focused && <AppText style={styles.txtStyle}>{t(name)}</AppText>}
           </Animatable.View>
         </View>
       </View>
@@ -98,5 +91,9 @@ const styles = StyleSheet.create({
     width: moderateScale(20, 0.3),
     height: moderateScale(20, 0.3),
     resizeMode: 'contain',
+  },
+  txtStyle: {
+    paddingHorizontal: moderateScale(8),
+    fontFamily: typo.bold,
   },
 });

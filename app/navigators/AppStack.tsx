@@ -31,7 +31,10 @@ const AppStack = () => {
           ...styles.tabBarLabelStyle,
           color: currentTheme.textColor,
         },
-        tabBarStyle: styles.tabBarStyle,
+        tabBarStyle: {
+          ...styles.tabBarStyle,
+          backgroundColor: currentTheme.headerBackground,
+        },
         tabBarItemStyle: styles.tabBarItemStyle,
         lazy: false,
         tabBarHideOnKeyboard: true,
