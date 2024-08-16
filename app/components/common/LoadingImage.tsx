@@ -1,12 +1,11 @@
 import {MLogo} from '@assets';
 import React, {useRef, useEffect} from 'react';
-import {Animated, Dimensions, Easing, StyleSheet} from 'react-native';
+import {Animated, Easing, I18nManager, StyleSheet} from 'react-native';
 import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters/extend';
 
-const {width, height} = Dimensions.get('window');
 const LoadingImage = () => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -37,6 +36,7 @@ const LoadingImage = () => {
         styles.image,
         {
           opacity: opacityInterpolation,
+          ...(I18nManager.isRTL ? {right: '50%'} : {left: '50%'}),
         },
       ]}
     />
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'absolute',
     top: '50%',
-    left: '50%',
     transform: [
       {translateX: -moderateScale(50)},
       {translateY: -moderateVerticalScale(50)},
