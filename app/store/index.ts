@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import {MMKV} from 'react-native-mmkv';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import {appSettingsReduce} from '@slices/appSettingsSlices';
 import secureStorage from '../common/secureStorage';
 import {tokenReducer} from '@slices/authSlices';
@@ -61,11 +61,11 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware => {
     const defaultMiddleWares = [api.middleware];
-    if (__DEV__) {
-      const createDebugger = require('redux-flipper').default;
-      defaultMiddleWares.push(logger);
-      defaultMiddleWares.push(createDebugger());
-    }
+    // if (__DEV__) {
+    //   const createDebugger = require('redux-flipper').default;
+    //   defaultMiddleWares.push(logger);
+    //   defaultMiddleWares.push(createDebugger());
+    // }
     const middleWares = getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

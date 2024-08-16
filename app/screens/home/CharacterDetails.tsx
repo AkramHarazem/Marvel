@@ -24,8 +24,6 @@ import Animated from 'react-native-reanimated';
 
 const {width} = Dimensions.get('window');
 
-const timeStamp = Date.now();
-
 const Comic = memo(({item}: any) => {
   return <AppTab label={item?.title} disabled={true} />;
 });
@@ -41,7 +39,6 @@ const CharacterDetails = () => {
   } = useGetCharacterByIdQuery(
     {
       id,
-      timeStamp,
     },
     {
       refetchOnMountOrArgChange: true,
@@ -62,7 +59,6 @@ const CharacterDetails = () => {
       getCharacterAllComics({
         id,
         offset: data?.data.offset + data?.data.count,
-        timeStamp,
       });
     }
   }, [data?.data]);
@@ -74,7 +70,6 @@ const CharacterDetails = () => {
         getCharacterAllComics({
           id,
           offset: (data?.data?.offset ?? 0) + (data?.data?.count ?? 0),
-          timeStamp,
         }),
     ]);
   };
@@ -96,7 +91,7 @@ const CharacterDetails = () => {
         </Text>
         {char[0]?.comics.available > 0 && !data?.data?.results ? (
           <AppButton
-            onPress={() => getCharacterAllComics({offset: 0, id, timeStamp})}
+            onPress={() => getCharacterAllComics({offset: 0, id})}
             isLoading={isFetchingComics}>
             view_comics
           </AppButton>

@@ -1,84 +1,70 @@
 import {api} from './api';
-import Config from 'react-native-config';
-import md5 from 'md5';
+
+interface CharacterData {
+  offset: number;
+  total: number;
+  count: number;
+  results: Array<any>;
+}
+interface ApiResponse {
+  data: CharacterData;
+}
+
+const mergeFunc = (
+  currentCacheData: ApiResponse,
+  responseData: ApiResponse,
+) => {
+  if (!currentCacheData.data.results) return responseData;
+  return {
+    data: {
+      offset: responseData.data.offset,
+      total: responseData.data.total,
+      count: responseData.data.count,
+      results: [...currentCacheData.data.results, ...responseData.data.results],
+    },
+  };
+};
 
 export const charactersApi = api.injectEndpoints({
   endpoints: build => ({
     getAllCharacters: build.query({
-      query: ({offset, nameStartsWith, timeStamp}) => ({
+      query: ({offset, nameStartsWith}) => ({
         url: 'characters',
         method: 'GET',
         params: {
-          apikey: Config.PUBLIC_KEY,
-          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: timeStamp,
           offset,
           ...(nameStartsWith.length > 0 && {nameStartsWith}),
         },
       }),
-      serializeQueryArgs: queryArgs => {
-        const {offset} = queryArgs;
-        return offset;
+      serializeQueryArgs: ({endpointName}) => {
+        return endpointName;
       },
-      merge: (currentCacheData, responseData) => {
-        if (!currentCacheData.data.results) return responseData;
-        return {
-          data: {
-            offset: responseData.data.offset,
-            total: responseData.data.total,
-            count: responseData.data.count,
-            results: [
-              ...currentCacheData.data.results,
-              ...responseData.data.results,
-            ],
-          },
-        };
-      },
+      merge: (currentCacheData, responseData) =>
+        mergeFunc(currentCacheData, responseData),
       forceRefetch({currentArg, previousArg}) {
         return currentArg !== previousArg;
       },
     }),
     getCharacterById: build.query({
-      query: ({timeStamp, id}) => ({
+      query: ({id}) => ({
         url: `characters/${id}`,
         method: 'GET',
-        params: {
-          apikey: Config.PUBLIC_KEY,
-          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: timeStamp,
-        },
       }),
     }),
     getCharacterAllComics: build.query({
-      query: ({timeStamp, offset, id}) => ({
+      query: ({offset, id}) => ({
         url: `characters/${id}/comics`,
         method: 'GET',
         params: {
-          apikey: Config.PUBLIC_KEY,
-          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: timeStamp,
           offset,
         },
       }),
       keepUnusedDataFor: 0,
-      serializeQueryArgs: queryArgs => {
-        const {offset} = queryArgs;
-        return offset;
+      serializeQueryArgs: ({endpointName}) => {
+        return endpointName;
       },
-      merge: (currentCacheData, responseData) => {
-        if (!currentCacheData.data.results) return responseData;
-        return {
-          data: {
-            offset: responseData.data.offset,
-            total: responseData.data.total,
-            count: responseData.data.count,
-            results: [
-              ...currentCacheData.data.results,
-              ...responseData.data.results,
-            ],
-          },
-        };
-      },
+      merge: (currentCacheData, responseData) =>
+        mergeFunc(currentCacheData, responseData),
       forceRefetch({currentArg, previousArg}) {
         return currentArg !== previousArg;
       },

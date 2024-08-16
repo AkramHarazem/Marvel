@@ -14,7 +14,6 @@ export type apiDataType = {
   results: any[];
 };
 
-const timeStamp = Date.now();
 const Home = () => {
   const currentTheme = useSelector(getCurrentTheme);
   const [searchValue, setSearchValue] = useState('');
@@ -30,7 +29,6 @@ const Home = () => {
     {
       offset,
       nameStartsWith: searchValue,
-      timeStamp,
     },
     {
       refetchOnMountOrArgChange: true,
