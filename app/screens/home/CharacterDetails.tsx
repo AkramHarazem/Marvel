@@ -23,6 +23,8 @@ import typo from '@common/typo';
 
 const {width} = Dimensions.get('window');
 
+const timeStamp = Date.now();
+
 const Comic = memo(({item}: any) => {
   return <AppTab label={item?.title} disabled={true} />;
 });
@@ -38,6 +40,7 @@ const CharacterDetails = () => {
   } = useGetCharacterByIdQuery(
     {
       id,
+      timeStamp,
     },
     {
       refetchOnMountOrArgChange: true,
@@ -58,6 +61,7 @@ const CharacterDetails = () => {
       getCharacterAllComics({
         id,
         offset: data?.data.offset + data?.data.count,
+        timeStamp,
       });
     }
   }, [data?.data]);
@@ -68,7 +72,8 @@ const CharacterDetails = () => {
       isComicsError &&
         getCharacterAllComics({
           id,
-          offset: data?.offset ?? 0,
+          offset: (data?.data?.offset ?? 0) + (data?.data?.count ?? 0),
+          timeStamp,
         }),
     ]);
   };
@@ -89,7 +94,8 @@ const CharacterDetails = () => {
           </AppText>
         </Text>
         {char[0]?.comics.available > 0 ? (
-          <AppButton onPress={() => getCharacterAllComics({offset: 0, id})}>
+          <AppButton
+            onPress={() => getCharacterAllComics({offset: 0, id, timeStamp})}>
             view_comics
           </AppButton>
         ) : null}
@@ -102,7 +108,7 @@ const CharacterDetails = () => {
   return (
     <ErrorView hasError={isError || isComicsError} onRetry={handleRetry}>
       <LoadingView visible={isFetchingComics || isFetching} />
-      {!isFetching && (
+      {!isFetching && char?.length > 0 && (
         <>
           <Image
             source={{

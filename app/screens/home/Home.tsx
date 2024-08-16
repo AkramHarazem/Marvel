@@ -18,6 +18,7 @@ export type apiDataType = {
   results: any[];
 };
 
+const timeStamp = Date.now();
 const Home = () => {
   const dispatch = useDispatch();
   const currentTheme = useSelector(getCurrentTheme);
@@ -47,6 +48,7 @@ const Home = () => {
     {
       offset,
       nameStartsWith: debouncedSearchValue,
+      timeStamp,
     },
     {
       refetchOnMountOrArgChange: true,

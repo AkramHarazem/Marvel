@@ -5,18 +5,17 @@ import md5 from 'md5';
 export const charactersApi = api.injectEndpoints({
   endpoints: build => ({
     getAllCharacters: build.query({
-      query: ({offset, nameStartsWith}) => ({
+      query: ({offset, nameStartsWith, timeStamp}) => ({
         url: 'characters',
         method: 'GET',
         params: {
           apikey: Config.PUBLIC_KEY,
-          hash: md5(1723675499021 + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: 1723675499021,
+          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
+          ts: timeStamp,
           offset,
           ...(nameStartsWith.length > 0 && {nameStartsWith}),
         },
       }),
-      keepUnusedDataFor: 60 * 60 * 24,
       serializeQueryArgs: queryArgs => {
         const {offset} = queryArgs;
         return offset;
@@ -45,8 +44,8 @@ export const charactersApi = api.injectEndpoints({
         method: 'GET',
         params: {
           apikey: Config.PUBLIC_KEY,
-          hash: md5(1723675499021 + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: 1723675499021,
+          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
+          ts: timeStamp,
         },
       }),
     }),
@@ -56,11 +55,12 @@ export const charactersApi = api.injectEndpoints({
         method: 'GET',
         params: {
           apikey: Config.PUBLIC_KEY,
-          hash: md5(1723675499021 + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
-          ts: 1723675499021,
+          hash: md5(timeStamp + Config.PRIVATE_KEY + Config.PUBLIC_KEY),
+          ts: timeStamp,
           offset,
         },
       }),
+      keepUnusedDataFor: 0,
       serializeQueryArgs: queryArgs => {
         const {offset} = queryArgs;
         return offset;
