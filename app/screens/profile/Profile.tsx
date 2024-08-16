@@ -1,4 +1,4 @@
-import {OptionsModal} from '@components/common';
+import {AppTab, OptionsModal} from '@components/common';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import {getUserInfo} from '@selectors/userInfoSelectors';
 import React, {useState} from 'react';
@@ -10,13 +10,16 @@ import {
 import {useSelector} from 'react-redux';
 import {colors} from '@common/colors';
 import useImageBase64 from '@hooks/useImageBase64';
-import {MoreButton} from '@components/more';
-import {phone, email, idCard, avatar, editing} from '@assets';
+import {phone, email, idCard, avatar, editing, login, profile} from '@assets';
+import {getToken} from '@selectors/authSelectors';
+import useHandleLogout from '@hooks/useHandleLogout';
 
 const Profile = () => {
   const currentTheme = useSelector(getCurrentTheme);
   const userInfo = useSelector(getUserInfo);
   const [modalVisible, setModalVisible] = useState(false);
+  const isLoggedIn = useSelector(getToken);
+  const {handleLogOut} = useHandleLogout();
 
   const userImage = userInfo?.image
     ? {uri: `data:image/png;base64,${userInfo?.image}`}
@@ -47,9 +50,14 @@ const Profile = () => {
         </Pressable>
       </View>
       <View style={styles.infoContainer}>
-        <MoreButton image={idCard} label={userInfo.name} disabled={true} />
-        <MoreButton image={email} label={userInfo.email} disabled={true} />
-        <MoreButton image={phone} label={userInfo.phone} disabled={true} />
+        <AppTab image={idCard} label={userInfo.name} disabled={true} />
+        <AppTab image={email} label={userInfo.email} disabled={true} />
+        <AppTab image={phone} label={userInfo.phone} disabled={true} />
+        {isLoggedIn ? (
+          <AppTab image={profile} label={'sign_out'} onPress={handleLogOut} />
+        ) : (
+          <AppTab image={login} label={'sign_in'} onPress={() => {}} />
+        )}
       </View>
       <OptionsModal
         modalVisible={modalVisible}

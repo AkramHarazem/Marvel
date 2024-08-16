@@ -17,19 +17,19 @@ import {colors} from '@common/colors';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 
-type MoreButtonProps = {
+type AppTabProps = {
   image?: ImageSourcePropType;
   label?: string;
   onPress?: any;
   disabled?: boolean;
 };
 
-const MoreButton = ({
+const AppTab = ({
   image,
   label,
   onPress = () => {},
   disabled = false,
-}: MoreButtonProps) => {
+}: AppTabProps) => {
   const currentTheme = useSelector(getCurrentTheme);
 
   return (
@@ -39,11 +39,13 @@ const MoreButton = ({
       onPress={onPress}
       disabled={disabled}>
       <View style={styles.row}>
-        <Image
-          source={image}
-          style={styles.icon}
-          tintColor={currentTheme.textColor}
-        />
+        {image ? (
+          <Image
+            source={image}
+            style={styles.icon}
+            tintColor={currentTheme.textColor}
+          />
+        ) : null}
         <AppText style={styles.label}>{label}</AppText>
       </View>
       {!disabled ? (
@@ -53,7 +55,7 @@ const MoreButton = ({
   );
 };
 
-export default MoreButton;
+export default AppTab;
 
 const styles = StyleSheet.create({
   container: {
@@ -79,12 +81,13 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: fontSizes[16],
-    paddingHorizontal: moderateScale(25),
     textAlign: 'left',
     fontFamily: typo.semiBold,
   },
   row: {
+    width: '95%',
     flexDirection: 'row',
     alignItems: 'center',
+    gap: moderateScale(20),
   },
 });
