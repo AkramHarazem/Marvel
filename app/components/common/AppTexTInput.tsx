@@ -91,13 +91,13 @@ const AppTextInput = React.forwardRef(
         onPress={onPress}
         activeOpacity={1}
         style={containerStyle}>
-        <View style={styles.labelContainer}>
-          {label.length !== 0 ? (
+        {label.length !== 0 ? (
+          <View style={styles.labelContainer}>
             <AppText style={[styles.label, {color: currentTheme.textColor}]}>
               {label}
             </AppText>
-          ) : null}
-        </View>
+          </View>
+        ) : null}
         <View style={[styles.container, {borderColor: getBorderColor()}]}>
           <TextInput
             ref={ref}

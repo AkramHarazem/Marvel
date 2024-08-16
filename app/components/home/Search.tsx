@@ -34,7 +34,7 @@ const Search = ({setSearchValue, setOffset}: SearchTypes) => {
   }, [dispatch, setOffset, setSearchValue]);
 
   const handleSearch = useCallback(() => {
-    setSearchValue(text);
+    setSearchValue(text.trim());
     setOffset(0);
     dispatch(api.util.resetApiState());
   }, [dispatch, setOffset, setSearchValue, text]);
