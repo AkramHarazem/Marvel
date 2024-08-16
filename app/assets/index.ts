@@ -13,7 +13,6 @@ module.exports = {
   panther: require('./images/panther.jpeg'),
   spider: require('./images/spider.jpeg'),
   thor: require('./images/thor.jpg'),
-  widow: require('./images/widow.jpg'),
   strange: require('./images/strange.jpeg'),
   login: require('./images/login.png'),
   language: require('./images/language.png'),
@@ -23,4 +22,7 @@ module.exports = {
   phone: require('./images/phone.png'),
   email: require('./images/email.png'),
   idCard: require('./images/idCard.png'),
+  MLogo: require('./images/M.png'),
+  notAvailable: require('./images/notAvailable.png'),
+  reload: require('./images/reload.png'),
 };

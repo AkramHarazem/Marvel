@@ -19,6 +19,16 @@
     "dark": "داكن",
     "system_default": "إعداد النظام",
     "en": "English",
-    "ar": "العربية"
+    "ar": "العربية",
+    "oops": "عفواً",
+    "try_again": "حاول مرة آخري",
+    "something_went_wrong": "شيء ما أحدث مشكلة",
+    "search_by_name":"البحث بالأسم",
+    "no_characters_found": "عذرًا، لم يتم العثور على شخصيات",
+    "marvel_characters":"شخصيات مارفل",
+    "view_comics": "عرض الكومكس",
+    "available_comics": "الكومكس المتاحة",
+    "no_description": "لا يوجد وصف متاح",
+    "details":"تفاصيل الشخصية"
 }
   

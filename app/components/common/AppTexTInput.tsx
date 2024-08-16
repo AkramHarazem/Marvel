@@ -149,7 +149,7 @@ export default AppTextInput;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: moderateVerticalScale(55),
+    height: moderateVerticalScale(45),
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
