@@ -61,8 +61,8 @@ const Login = () => {
     setIsLoading(true);
     await sleep(2000); //simulate login api
     if (
-      data?.userName.trim() === 'Akram' &&
-      data?.password.trim() === 'Akram@123'
+      data?.userName.trim() === 'User' &&
+      data?.password.trim() === 'password'
     ) {
       reset();
       setError('');
@@ -71,8 +71,8 @@ const Login = () => {
         dispatch(
           setUserInfo({
             name: data?.userName.trim(),
-            email: 'akram@gmail.com',
-            phone: '201112590070',
+            email: 'user@gmail.com',
+            phone: '201112277799',
           }),
         );
       }
@@ -92,11 +92,12 @@ const Login = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={styles.flex}
       behavior="position"
-      contentContainerStyle={{
-        flex: 1,
-      }}>
+      contentContainerStyle={[
+        styles.flex,
+        {backgroundColor: currentTheme.containerBackgroundColor},
+      ]}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={[
@@ -176,6 +177,7 @@ const Login = () => {
 };
 export default Login;
 const styles = StyleSheet.create({
+  flex: {flex: 1},
   container: {
     paddingVertical: moderateVerticalScale(55),
     paddingHorizontal: moderateScale(24),

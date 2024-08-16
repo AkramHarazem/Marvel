@@ -29,30 +29,9 @@ export const PersistGateWithContext = ({
   useEffect(() => {
     if (!currentTheme?.theme) {
       const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
-      const statusBarColor =
-        colorScheme === 'dark' ? colors.black : colors.white;
-      const barStyle =
-        colorScheme === 'dark' ? 'light-content' : 'dark-content';
-
       dispatch(setCurrentTheme({...theme, theme: colorScheme, system: true}));
-      StatusBar.setBackgroundColor(statusBarColor);
-      StatusBar.setBarStyle(barStyle);
     }
   }, [currentTheme, colorScheme, dispatch]);
-
-  useEffect(() => {
-    const statusBarColor = (currentTheme?.theme || colorScheme)?.includes(
-      'dark',
-    )
-      ? colors.black
-      : colors.white;
-    const barStyle = (currentTheme?.theme || colorScheme)?.includes('dark')
-      ? 'light-content'
-      : 'dark-content';
-
-    StatusBar.setBackgroundColor(statusBarColor);
-    StatusBar.setBarStyle(barStyle);
-  }, [currentTheme, colorScheme]);
 
   const hideSplash = useCallback(() => {
     BootSplash.hide({fade: true});
@@ -68,6 +47,18 @@ export const PersistGateWithContext = ({
       loading={null}
       persistor={persistor}
       onBeforeLift={onBeforeLift}>
+      <StatusBar
+        barStyle={
+          (currentTheme?.theme || colorScheme)?.includes('light')
+            ? 'dark-content'
+            : 'light-content'
+        }
+        backgroundColor={
+          (currentTheme?.theme || colorScheme)?.includes('dark')
+            ? colors.black
+            : colors.white
+        }
+      />
       <NavigationContainer
         theme={
           (currentTheme?.theme || colorScheme)?.includes('dark')
