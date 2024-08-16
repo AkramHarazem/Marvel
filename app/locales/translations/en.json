@@ -29,5 +29,8 @@
     "view_comics":"View Comics",
     "available_comics":"Available Comics",
     "no_description":"No description available",
-    "details":"Character Details"
+    "details":"Character Details",
+    "sure_logout":"are you sure you want sign out?",
+    "cancel":"Cancel",
+    "confirm":"Confirm"
 }

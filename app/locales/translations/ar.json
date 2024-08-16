@@ -29,6 +29,9 @@
     "view_comics": "عرض الكومكس",
     "available_comics": "الكومكس المتاحة",
     "no_description": "لا يوجد وصف متاح",
-    "details":"تفاصيل الشخصية"
+    "details":"تفاصيل الشخصية",
+    "sure_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد"
 }
   
