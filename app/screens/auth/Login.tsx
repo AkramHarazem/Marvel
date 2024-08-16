@@ -23,8 +23,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import {LoginCarousel} from '@components/auth';
-import {useNavigation} from '@react-navigation/native';
-import screenNames from '@common/screensConfig';
+import screenNames, {useMainNavigation} from '@common/screensConfig';
 import {setToken} from '@slices/authSlices';
 import {logo} from '@assets';
 import {setUserInfo} from '@slices/userInfoSlices';
@@ -38,7 +37,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState('');
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+  const navigation = useMainNavigation();
   const dispatch = useDispatch();
 
   const {

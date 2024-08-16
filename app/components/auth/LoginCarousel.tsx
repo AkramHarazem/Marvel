@@ -22,9 +22,6 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters/extend';
-import {AppText} from '@components/common';
-import typo from '@common/typo';
-import {fontSizes} from '@common/fonts';
 
 const slides = [antMan, captain, hulk, ironMan, panther, spider, thor, strange];
 
