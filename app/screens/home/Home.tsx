@@ -1,14 +1,10 @@
-import React, {useCallback, useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {useDebounce} from 'use-debounce';
-// @ts-ignore
-import debounce from 'lodash.debounce';
+import {useSelector} from 'react-redux';
 import {ErrorView, LoadingView} from '@components/common';
 import {CharactersList, Search} from '@components/home';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 import {useGetAllCharactersQuery} from '@services/characters';
-import {api} from '@services/api';
 
 export type apiDataType = {
   offset: number;
@@ -20,23 +16,9 @@ export type apiDataType = {
 
 const timeStamp = Date.now();
 const Home = () => {
-  const dispatch = useDispatch();
   const currentTheme = useSelector(getCurrentTheme);
   const [searchValue, setSearchValue] = useState('');
   const [offset, setOffset] = useState(0);
-  const [debouncedSearchValue] = useDebounce(searchValue, 1000);
-
-  const handleSearch = useCallback(
-    debounce(() => {
-      setOffset(0);
-      dispatch(api.util.resetApiState());
-    }, 1000),
-    [],
-  );
-
-  useEffect(() => {
-    handleSearch();
-  }, [debouncedSearchValue, handleSearch]);
 
   const {
     currentData: data,
@@ -47,7 +29,7 @@ const Home = () => {
   } = useGetAllCharactersQuery(
     {
       offset,
-      nameStartsWith: debouncedSearchValue,
+      nameStartsWith: searchValue,
       timeStamp,
     },
     {
@@ -64,11 +46,7 @@ const Home = () => {
           {backgroundColor: currentTheme.containerBackgroundColor},
         ]}>
         <LoadingView visible={isFetching} />
-        <Search
-          setSearchValue={setSearchValue}
-          searchValue={searchValue}
-          setOffset={setOffset}
-        />
+        <Search setSearchValue={setSearchValue} setOffset={setOffset} />
         {!isLoading && data ? (
           <CharactersList data={data.data} setOffset={setOffset} />
         ) : null}

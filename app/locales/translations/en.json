@@ -32,5 +32,8 @@
     "details":"Character Details",
     "sure_logout":"are you sure you want sign out?",
     "cancel":"Cancel",
-    "confirm":"Confirm"
+    "confirm":"Confirm",
+    "done":"Done",
+    "next":"Next",
+    "search":"Search"
 }

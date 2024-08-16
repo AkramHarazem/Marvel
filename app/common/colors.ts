@@ -7,6 +7,7 @@ const APP_COLORS = {
   lightGray: 'rgba(181, 181, 181, 1)',
   lighterGray: 'rgba(200, 200, 200, 1)',
   error: 'rgba(216, 3, 3, 1)',
+  green: 'rgba(0, 138, 0, 1)',
 };
 
 const THEME_COLORS = {

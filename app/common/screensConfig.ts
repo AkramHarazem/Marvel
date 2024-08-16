@@ -26,6 +26,7 @@ const screenNames = {
 } as const;
 export type paramsTypes = {
   id?: number;
+  imgUrl?: string;
 };
 
 export type MainParamList = {
