@@ -51,7 +51,9 @@ const OptionsModal = ({
             key={idx}
             style={styles.itemContainer}
             onPress={() => handlePress(item)}>
-            <RadioButton selected={item === selectedOption} />
+            {selectedOption ? (
+              <RadioButton selected={item === selectedOption} />
+            ) : null}
             <AppText style={styles.txtStyle}>{item}</AppText>
           </TouchableOpacity>
         ))}
