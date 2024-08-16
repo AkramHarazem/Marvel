@@ -51,7 +51,11 @@ const styles = StyleSheet.create({
     height: moderateVerticalScale(100),
     resizeMode: 'contain',
     position: 'absolute',
-    top: moderateVerticalScale((height - 100) / 2),
-    left: moderateScale((width - 100) / 2),
+    top: '50%',
+    left: '50%',
+    transform: [
+      {translateX: -moderateScale(50)},
+      {translateY: -moderateVerticalScale(50)},
+    ],
   },
 });
