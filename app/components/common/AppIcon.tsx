@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {moderateScale} from 'react-native-size-matters/extend';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
@@ -24,7 +23,6 @@ type AppIconProps = {
 
 const AppIcon = ({
   image,
-  icon,
   onPress,
   style,
   shouldReverse = false,
@@ -38,17 +36,10 @@ const AppIcon = ({
       onPress={onPress ? onPress : goBack}
       style={[styles.container, shouldReverse && styles.reverse]}
       disabled={disabled}>
-      {image ? (
-        <Image source={image} style={style} />
-      ) : (
-        icon && (
-          <Icon
-            name={icon}
-            size={moderateScale(22, 0.3)}
-            color={currentTheme.textColor}
-          />
-        )
-      )}
+      <Image
+        source={image}
+        style={[styles.image, style, {tintColor: currentTheme.textColor}]}
+      />
     </TouchableOpacity>
   );
 };
@@ -62,5 +53,9 @@ const styles = StyleSheet.create({
   },
   reverse: {
     transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+  },
+  image: {
+    width: moderateScale(22, 0.3),
+    height: moderateScale(22, 0.3),
   },
 });

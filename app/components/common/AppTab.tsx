@@ -16,6 +16,7 @@ import {AppIcon, AppText} from '@components/common';
 import {colors} from '@common/colors';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
+import {rightChevron} from '@assets';
 
 type AppTabProps = {
   image?: ImageSourcePropType;
@@ -49,7 +50,7 @@ const AppTab = ({
         <AppText style={styles.label}>{label}</AppText>
       </View>
       {!disabled ? (
-        <AppIcon icon={'chevron-right'} shouldReverse={true} disabled={true} />
+        <AppIcon image={rightChevron} shouldReverse={true} disabled={true} />
       ) : null}
     </TouchableOpacity>
   );

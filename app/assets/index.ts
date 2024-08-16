@@ -25,4 +25,5 @@ module.exports = {
   MLogo: require('./images/M.png'),
   notAvailable: require('./images/notAvailable.png'),
   reload: require('./images/reload.png'),
+  rightChevron: require('./images/rightChevron.png'),
 };
