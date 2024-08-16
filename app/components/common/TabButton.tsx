@@ -8,7 +8,6 @@ import {
 import React, {useEffect, useRef} from 'react';
 import * as Animatable from 'react-native-animatable';
 import images from '../../assets';
-import {colors} from '@common/colors';
 import {useTranslation} from 'react-i18next';
 import {
   moderateScale,
@@ -34,11 +33,9 @@ const TabButton = (props: TabButtonProps) => {
 
   useEffect(() => {
     if (focused) {
-      viewRef.current?.animate({0: {scale: 0}, 1: {scale: 1}});
-      textViewRef.current?.animate({0: {scale: 0}, 1: {scale: 1}});
+      textViewRef.current?.animate({0: {scaleX: 0}, 1: {scaleX: 1}});
     } else {
-      viewRef.current?.animate({0: {scale: 1}, 1: {scale: 0}});
-      textViewRef.current?.animate({0: {scale: 1}, 1: {scale: 0}});
+      viewRef.current?.animate({0: {scaleX: 1}, 1: {scaleX: 0}});
     }
   }, [focused]);
 
@@ -48,15 +45,7 @@ const TabButton = (props: TabButtonProps) => {
       activeOpacity={1}
       style={[styles.container, {flex: focused ? 1 : 0.65}]}>
       <View>
-        <Animatable.View
-          ref={viewRef}
-          duration={500}
-          style={[
-            StyleSheet.absoluteFillObject,
-            {backgroundColor: colors.red, borderRadius: moderateScale(16)},
-          ]}
-        />
-        <View style={[styles.btn, focused && {backgroundColor: colors.red}]}>
+        <View style={[styles.btn]}>
           <Image
             source={images[name]}
             resizeMode="contain"
@@ -83,8 +72,6 @@ const styles = StyleSheet.create({
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 8,
-    borderRadius: 16,
   },
   tabBarIcon: {
     width: moderateScale(20, 0.3),
