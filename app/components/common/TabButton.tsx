@@ -56,8 +56,7 @@ const TabButton = (props: TabButtonProps) => {
             {backgroundColor: colors.red, borderRadius: moderateScale(16)},
           ]}
         />
-        <View
-          style={[styles.btn, {backgroundColor: focused ? null : colors.red}]}>
+        <View style={[styles.btn, focused && {backgroundColor: colors.red}]}>
           <Image
             source={images[name]}
             resizeMode="contain"

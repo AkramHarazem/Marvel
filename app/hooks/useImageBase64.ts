@@ -8,6 +8,7 @@ import {
   ImageLibraryOptions,
 } from 'react-native-image-picker';
 import ImageResizer from '@bam.tech/react-native-image-resizer';
+// @ts-ignore
 import ImgToBase64 from 'react-native-image-base64';
 import {Platform} from 'react-native';
 import {PERMISSIONS, request} from 'react-native-permissions';

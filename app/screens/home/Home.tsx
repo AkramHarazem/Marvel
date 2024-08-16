@@ -1,8 +1,8 @@
 import React, {useCallback, useState, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {moderateScale} from 'react-native-size-matters/extend';
 import {useDispatch, useSelector} from 'react-redux';
 import {useDebounce} from 'use-debounce';
+// @ts-ignore
 import debounce from 'lodash.debounce';
 import {ErrorView, LoadingView} from '@components/common';
 import {CharactersList, Search} from '@components/home';
@@ -82,6 +82,5 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: moderateScale(20),
   },
 });
