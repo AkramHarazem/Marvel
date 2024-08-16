@@ -5,7 +5,11 @@ import {colors} from '@common/colors';
 
 const LoadingView = ({visible}: {visible: boolean}) => {
   return (
-    <Modal transparent={true} animationType="none" visible={visible}>
+    <Modal
+      transparent={true}
+      animationType="none"
+      visible={visible}
+      statusBarTranslucent={true}>
       <View style={[styles.overlay, {backgroundColor: colors.black}]} />
       <LoadingImage />
     </Modal>
