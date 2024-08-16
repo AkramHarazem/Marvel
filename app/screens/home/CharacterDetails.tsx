@@ -1,4 +1,4 @@
-import {Dimensions, Image, StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import React, {memo, useCallback} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {
@@ -20,6 +20,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import {Text} from 'react-native-animatable';
 import {fontSizes} from '@common/fonts';
 import typo from '@common/typo';
+import Animated from 'react-native-reanimated';
 
 const {width} = Dimensions.get('window');
 
@@ -30,7 +31,7 @@ const Comic = memo(({item}: any) => {
 });
 
 const CharacterDetails = () => {
-  const {id}: {id?: number} = useRoute()?.params || {};
+  const {id, imgUrl}: {id?: number; imgUrl?: string} = useRoute()?.params || {};
 
   const {
     data: {data: {results: char = []} = {}} = {},
@@ -93,45 +94,49 @@ const CharacterDetails = () => {
             : {char[0]?.comics.available}
           </AppText>
         </Text>
-        {char[0]?.comics.available > 0 ? (
+        {char[0]?.comics.available > 0 && !data?.data?.results ? (
           <AppButton
-            onPress={() => getCharacterAllComics({offset: 0, id, timeStamp})}>
+            onPress={() => getCharacterAllComics({offset: 0, id, timeStamp})}
+            isLoading={isFetchingComics}>
             view_comics
           </AppButton>
         ) : null}
       </>
     );
-  }, [isEmpty, char]);
+  }, [isEmpty, char, isFetchingComics]);
 
   const renderItem = useCallback(({item}: any) => <Comic item={item} />, []);
 
   return (
     <ErrorView hasError={isError || isComicsError} onRetry={handleRetry}>
-      <LoadingView visible={isFetchingComics || isFetching} />
+      <LoadingView
+        visible={
+          isFetching || (isFetchingComics && data?.data?.results.length > 0)
+        }
+      />
+      <Animated.Image
+        source={{
+          uri: imgUrl?.replace('http://', 'https://'),
+        }}
+        style={styles.image}
+        sharedTransitionTag="hero"
+      />
       {!isFetching && char?.length > 0 && (
-        <>
-          <Image
-            source={{
-              uri: `${char[0].thumbnail.path}.${char[0].thumbnail.extension}`,
-            }}
-            style={styles.image}
-          />
-          <FlatList
-            data={data?.data?.results}
-            renderItem={renderItem}
-            contentContainerStyle={styles.contentContainerStyle}
-            keyExtractor={item => String(item?.id)}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            maxToRenderPerBatch={10}
-            updateCellsBatchingPeriod={30}
-            initialNumToRender={10}
-            windowSize={11}
-            ListHeaderComponent={renderHeader}
-            ListHeaderComponentStyle={styles.headerContainer}
-            onEndReached={onReachEnd}
-          />
-        </>
+        <FlatList
+          data={data?.data?.results}
+          renderItem={renderItem}
+          contentContainerStyle={styles.contentContainerStyle}
+          keyExtractor={item => String(item?.id)}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          maxToRenderPerBatch={10}
+          updateCellsBatchingPeriod={30}
+          initialNumToRender={10}
+          windowSize={11}
+          ListHeaderComponent={renderHeader}
+          ListHeaderComponentStyle={styles.headerContainer}
+          onEndReached={onReachEnd}
+        />
       )}
     </ErrorView>
   );
@@ -161,6 +166,7 @@ const styles = StyleSheet.create({
   descriptionStyle: {
     fontSize: fontSizes[16],
     fontFamily: typo.medium,
+    textAlign: 'center',
   },
   comicNumStyle: {
     fontSize: fontSizes[16],

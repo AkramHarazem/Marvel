@@ -1,10 +1,4 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {memo} from 'react';
 import {AppText} from '@components/common';
 import {
@@ -16,16 +10,20 @@ import {fontSizes} from '@common/fonts';
 import {notAvailable} from '@assets';
 import screenNames, {useHomeNavigation} from '@common/screensConfig';
 import typo from '@common/typo';
+import Animated from 'react-native-reanimated';
 
 const {width} = Dimensions.get('window');
 
-export const cardWidth = moderateScale(width / 2 - 30, 0.3);
+export const cardWidth = moderateScale(width / 2 - 40, 0.3);
 
 const CharacterCard = memo(({item}: any) => {
   const {navigate} = useHomeNavigation();
 
   const navigateToDetails = () => {
-    navigate(screenNames.HomeStack.CharacterDetails, {id: item.id});
+    navigate(screenNames.HomeStack.CharacterDetails, {
+      id: item.id,
+      imgUrl: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+    });
   };
 
   return (
@@ -33,13 +31,19 @@ const CharacterCard = memo(({item}: any) => {
       style={styles.container}
       activeOpacity={0.8}
       onPress={navigateToDetails}>
-      <Image
+      <Animated.Image
         source={
           item.thumbnail?.path.includes('image_not_available')
             ? notAvailable
-            : {uri: `${item.thumbnail.path}.${item.thumbnail.extension}`}
+            : {
+                uri: `${item.thumbnail.path}.${item.thumbnail.extension}`.replace(
+                  'http://',
+                  'https://',
+                ),
+              }
         }
         style={styles.image}
+        sharedTransitionTag="hero"
         resizeMode="cover"
       />
       <View style={styles.nameContainer}>

@@ -87,9 +87,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     marginTop: moderateVerticalScale(55),
     paddingBottom: moderateVerticalScale(145),
+    paddingHorizontal: moderateScale(20),
   },
   columnWrapperStyle: {
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginVertical: moderateScale(10),
   },
   emptyContainer: {
