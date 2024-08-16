@@ -1,3 +1,5 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+
 const screenNames = {
   RootStack: {
     AuthStack: 'AuthStack',
@@ -13,6 +15,7 @@ const screenNames = {
   },
   HomeStack: {
     Home: 'Home',
+    CharacterDetails: 'CharacterDetails',
   },
   ProfileStack: {
     Profile: 'Profile',
@@ -20,6 +23,24 @@ const screenNames = {
   MoreStack: {
     More: 'More',
   },
+} as const;
+export type paramsTypes = {
+  id?: number;
+};
+
+export type MainParamList = {
+  [screenNames.RootStack.AppStack]: paramsTypes | undefined;
+  [screenNames.RootStack.AuthStack]: paramsTypes | undefined;
+};
+export type HomeParamList = {
+  [screenNames.HomeStack.CharacterDetails]: paramsTypes | undefined;
+};
+export const useMainNavigation = () => {
+  return useNavigation<NavigationProp<MainParamList>>();
+};
+
+export const useHomeNavigation = () => {
+  return useNavigation<NavigationProp<HomeParamList>>();
 };
 
 export default screenNames;
