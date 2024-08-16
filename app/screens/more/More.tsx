@@ -2,15 +2,16 @@ import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {getCurrentTheme} from '@selectors/appSettingsSelectors';
-import {language, login, profile, theme} from '@assets';
+import {language, theme} from '@assets';
 import {getToken} from '@selectors/authSelectors';
 import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters/extend';
-import {AppTab, OptionsModal} from '@components/common';
+import {AppTab, OptionsModal, AppButton} from '@components/common';
 import useHandleAppSettings from '@hooks/useHandleAppSettings';
 import useHandleLogout from '@hooks/useHandleLogout';
+import {BUTTON_TYPES} from '@components/common/AppButton';
 
 const More = () => {
   const currentTheme = useSelector(getCurrentTheme);
@@ -55,9 +56,11 @@ const More = () => {
         onPress={() => handleOpenModal('language')}
       />
       {isLoggedIn ? (
-        <AppTab image={profile} label={'sign_out'} onPress={handleLogOut} />
+        <AppButton type={BUTTON_TYPES.SECONDARY} onPress={handleLogOut}>
+          sign_out
+        </AppButton>
       ) : (
-        <AppTab image={login} label={'sign_in'} onPress={() => {}} />
+        <AppButton>sign_in</AppButton>
       )}
       <OptionsModal
         modalVisible={modalVisible}
