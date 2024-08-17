@@ -39,6 +39,8 @@
     "sponsored_by": "برعاية",
     "you_sign_out_successfully": "تم تسجيل خروجك بنجاح",
     "dismiss":"إخفاء",
-    "end_of_list": "نهاية القائمة"
+    "end_of_list": "نهاية القائمة",
+    "upload_succeeded": "تم التحميل بنجاح",
+    "upload_failed": "فشل التحميل"
 }
   

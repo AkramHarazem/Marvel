@@ -3,6 +3,7 @@ import * as colors from './colors';
 import typo from './typo';
 import * as fonts from './fonts';
 import screensConfig from './screensConfig';
+import * as utils from './utils';
 
 module.exports = {
   secureStorage,
@@ -10,4 +11,5 @@ module.exports = {
   typo,
   ...fonts,
   screensConfig,
+  ...utils,
 };

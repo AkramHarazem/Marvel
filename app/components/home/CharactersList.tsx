@@ -10,6 +10,8 @@ import CharacterCard, {cardWidth} from './CharacterCard';
 import {AppText} from '@components/common';
 import {apiDataType} from '@screens/home/Home';
 import {trigger} from 'react-native-haptic-feedback';
+import {showSnack} from '@common/utils';
+import {useTranslation} from 'react-i18next';
 
 type CharactersLisTypes = {
   data: apiDataType;
@@ -23,6 +25,7 @@ const numColumns = Math.floor((width - moderateScale(15) * 2) / cardWidth);
 const Placeholder = () => <View style={{width: cardWidth}} />;
 
 const CharactersList = ({data, setOffset}: CharactersLisTypes) => {
+  const {t} = useTranslation();
   const isEmpty = data?.results?.length === 0;
   const cards = useMemo(() => {
     const d = data?.results ? [...data?.results] : [];
@@ -36,10 +39,13 @@ const CharactersList = ({data, setOffset}: CharactersLisTypes) => {
     if (data?.offset < data?.total && data?.results?.length !== data?.total) {
       setOffset((prev: number) => prev + data?.count);
     } else {
-      trigger('impactLight', {
-        enableVibrateFallback: true,
-        ignoreAndroidSystemSettings: false,
-      });
+      if (data?.results?.length > 0) {
+        trigger('impactLight', {
+          enableVibrateFallback: true,
+          ignoreAndroidSystemSettings: false,
+        });
+        showSnack(t('end_of_list'), t('dismiss'));
+      }
     }
   }, []);
 

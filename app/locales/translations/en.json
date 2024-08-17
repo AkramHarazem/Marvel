@@ -39,5 +39,7 @@
     "sponsored_by": "Sponsored by",
     "you_sign_out_successfully":"You sign out successfully",
     "dismiss":"Dismiss",
-    "end_of_list":"End of the list"
+    "end_of_list":"End of the list",
+    "upload_succeeded":"Upload succeeded",
+    "upload_failed":"Upload failed"
 }

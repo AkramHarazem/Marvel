@@ -16,6 +16,9 @@ import {useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserInfo} from '@selectors/userInfoSelectors';
 import {setUserInfo} from '@slices/userInfoSlices';
+import {showSnack} from '@common/utils';
+import {useTranslation} from 'react-i18next';
+import {colors} from '@common/colors';
 
 type ImageBase64Props = {
   setModalVisible: (arg: boolean) => void;
@@ -32,6 +35,7 @@ const OPTIONS: CameraOptions & ImageLibraryOptions = {
 };
 
 const useImageBase64 = ({setModalVisible, modalVisible}: ImageBase64Props) => {
+  const {t} = useTranslation();
   const options = ['camera', 'gallery'];
   const dispatch = useDispatch();
   const userInfo = useSelector(getUserInfo);
@@ -59,14 +63,16 @@ const useImageBase64 = ({setModalVisible, modalVisible}: ImageBase64Props) => {
 
       const base64 = await ImgToBase64.getBase64String(result.uri);
       dispatch(setUserInfo({...userInfo, image: base64}));
-    } catch (error) {}
+      showSnack(t('upload_succeeded'), t('dismiss'));
+    } catch (error) {
+      showSnack(t('upload_failed'), t('dismiss'), colors.error);
+    }
   };
 
   const onSelectPhoto = (response: ImagePickerResponse) => {
     const asset = response?.assets?.[0];
     if (asset) {
       resize(asset);
-      setModalVisible(!modalVisible);
     }
   };
 
@@ -93,6 +99,7 @@ const useImageBase64 = ({setModalVisible, modalVisible}: ImageBase64Props) => {
       } else {
         openImageLibrary();
       }
+      setModalVisible(!modalVisible);
     },
     [modalVisible],
   );

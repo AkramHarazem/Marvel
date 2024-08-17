@@ -1,12 +1,10 @@
-import {colors} from '@common/colors';
 import screenNames, {useMainNavigation} from '@common/screensConfig';
-import typo from '@common/typo';
+import {showSnack} from '@common/utils';
 import {api} from '@services/api';
 import {resetToken} from '@slices/authSlices';
 import {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, I18nManager} from 'react-native';
-import Snackbar from 'react-native-snackbar';
+import {Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 const useHandleLogout = () => {
@@ -19,18 +17,7 @@ const useHandleLogout = () => {
       index: 0,
       routes: [{name: screenNames.RootStack.AuthStack}],
     });
-    Snackbar.show({
-      text: t('you_sign_out_successfully'),
-      duration: Snackbar.LENGTH_LONG,
-      backgroundColor: colors.snackColor,
-      rtl: I18nManager.isRTL,
-      textColor: colors.white,
-      fontFamily: typo.bold,
-      action: {
-        text: t('dismiss'),
-        textColor: colors.lightDark,
-      },
-    });
+    showSnack(t('you_sign_out_successfully'), t('dismiss'));
     dispatch(api.util.resetApiState());
   }, []);
   const handleLogOut = useCallback(() => {

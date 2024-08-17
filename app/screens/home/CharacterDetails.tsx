@@ -1,4 +1,4 @@
-import {Dimensions, I18nManager, StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import React, {memo, useCallback} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {
@@ -22,9 +22,8 @@ import {fontSizes} from '@common/fonts';
 import typo from '@common/typo';
 import Animated from 'react-native-reanimated';
 import {trigger} from 'react-native-haptic-feedback';
-import Snackbar from 'react-native-snackbar';
 import {useTranslation} from 'react-i18next';
-import {colors} from '@common/colors';
+import {showSnack} from '@common/utils';
 
 const {width} = Dimensions.get('window');
 
@@ -66,22 +65,13 @@ const CharacterDetails = () => {
         offset: data?.data.offset + data?.data.count,
       });
     } else {
-      trigger('impactLight', {
-        enableVibrateFallback: true,
-        ignoreAndroidSystemSettings: false,
-      });
-      Snackbar.show({
-        text: t('end_of_list'),
-        duration: Snackbar.LENGTH_LONG,
-        backgroundColor: colors.snackColor,
-        rtl: I18nManager.isRTL,
-        textColor: colors.white,
-        fontFamily: typo.bold,
-        action: {
-          text: t('dismiss'),
-          textColor: colors.lightDark,
-        },
-      });
+      if (data?.data.results?.length > 0) {
+        trigger('impactLight', {
+          enableVibrateFallback: true,
+          ignoreAndroidSystemSettings: false,
+        });
+        showSnack(t('end_of_list'), t('dismiss'));
+      }
     }
   }, [data?.data]);
 
