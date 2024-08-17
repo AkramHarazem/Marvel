@@ -1,4 +1,9 @@
-import React, {PropsWithChildren, useCallback, useEffect} from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Persistor} from 'redux-persist';
 import {
@@ -17,6 +22,7 @@ import {
 import {colors, darkTheme, lightTheme} from '@common/colors';
 import {setCurrentTheme} from '@slices/appSettingsSlices';
 import {initI18n} from 'app/locales';
+import {Splash} from './common';
 
 export const PersistGateWithContext = ({
   persistor,
@@ -25,6 +31,7 @@ export const PersistGateWithContext = ({
   const colorScheme = useColorScheme();
   const currentTheme = useSelector(getCurrentTheme);
   const currentLang = useSelector(getCurrentLanguage);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     if (!currentTheme?.theme) {
@@ -38,7 +45,12 @@ export const PersistGateWithContext = ({
   }, []);
 
   const onBeforeLift = useCallback(async () => {
-    hideSplash();
+    setTimeout(() => {
+      hideSplash();
+    }, 1000);
+    setTimeout(() => {
+      setShowSplash(false);
+    }, 3000); //simulate to have custom splash
     initI18n(currentLang);
   }, [hideSplash, currentLang]);
 
@@ -59,14 +71,18 @@ export const PersistGateWithContext = ({
             : colors.white
         }
       />
-      <NavigationContainer
-        theme={
-          (currentTheme?.theme || colorScheme)?.includes('dark')
-            ? DarkTheme
-            : DefaultTheme
-        }>
-        <RootStack />
-      </NavigationContainer>
+      {showSplash ? (
+        <Splash />
+      ) : (
+        <NavigationContainer
+          theme={
+            (currentTheme?.theme || colorScheme)?.includes('dark')
+              ? DarkTheme
+              : DefaultTheme
+          }>
+          <RootStack />
+        </NavigationContainer>
+      )}
     </PersistGate>
   );
 };

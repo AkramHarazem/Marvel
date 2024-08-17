@@ -7,3 +7,4 @@ export {default as RadioButton} from './RadioButton';
 export {default as LoadingView} from './LoadingView';
 export {default as ErrorView} from './ErrorView';
 export {default as AppTab} from './AppTab';
+export {default as Splash} from './Splash';
