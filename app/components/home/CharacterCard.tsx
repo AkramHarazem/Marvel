@@ -1,5 +1,11 @@
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React, {memo} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {memo, useState} from 'react';
 import {AppText} from '@components/common';
 import {
   moderateScale,
@@ -11,12 +17,16 @@ import {notAvailable} from '@assets';
 import screenNames, {useHomeNavigation} from '@common/screensConfig';
 import typo from '@common/typo';
 import Animated from 'react-native-reanimated';
+import {useSelector} from 'react-redux';
+import {getCurrentTheme} from '@selectors/appSettingsSelectors';
 
 const {width} = Dimensions.get('window');
 
 export const cardWidth = moderateScale(width / 2 - 40, 0.3);
 
 const CharacterCard = memo(({item}: any) => {
+  const currentTheme = useSelector(getCurrentTheme);
+  const [showLoader, SetShowLoader] = useState(true);
   const {navigate} = useHomeNavigation();
 
   const navigateToDetails = () => {
@@ -26,26 +36,47 @@ const CharacterCard = memo(({item}: any) => {
     });
   };
 
+  const handleImageLoad = () => {
+    SetShowLoader(false);
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.8}
       onPress={navigateToDetails}>
-      <Animated.Image
-        source={
-          item.thumbnail?.path.includes('image_not_available')
-            ? notAvailable
-            : {
-                uri: `${item.thumbnail.path}.${item.thumbnail.extension}`.replace(
-                  'http://',
-                  'https://',
-                ),
-              }
-        }
-        style={styles.image}
-        sharedTransitionTag="hero"
-        resizeMode="cover"
-      />
+      <View
+        style={StyleSheet.flatten([
+          styles.imageContainer,
+          {
+            backgroundColor: currentTheme.containerBackgroundColor,
+          },
+        ])}>
+        {showLoader && (
+          <ActivityIndicator
+            size={'large'}
+            color={currentTheme.textColor}
+            style={styles.loader}
+          />
+        )}
+        <Animated.Image
+          source={
+            item.thumbnail?.path.includes('image_not_available')
+              ? notAvailable
+              : {
+                  uri: `${item.thumbnail.path}.${item.thumbnail.extension}`.replace(
+                    'http://',
+                    'https://',
+                  ),
+                }
+          }
+          style={styles.image}
+          sharedTransitionTag="hero"
+          resizeMode="cover"
+          onLoadEnd={handleImageLoad}
+        />
+      </View>
+
       <View style={styles.nameContainer}>
         <AppText style={styles.name} numberOfLines={2}>
           {item?.name}
@@ -83,11 +114,20 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: moderateScale(12),
     borderBottomLeftRadius: moderateScale(12),
   },
+  imageContainer: {
+    flex: 1,
+    borderRadius: moderateScale(12),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   image: {
     width: '100%',
     height: '100%',
     borderRadius: moderateScale(12),
     resizeMode: 'cover',
+  },
+  loader: {
+    position: 'absolute',
   },
   name: {
     fontSize: fontSizes[13],
