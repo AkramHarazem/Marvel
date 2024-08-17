@@ -9,6 +9,7 @@ import typo from '@common/typo';
 import CharacterCard, {cardWidth} from './CharacterCard';
 import {AppText} from '@components/common';
 import {apiDataType} from '@screens/home/Home';
+import {trigger} from 'react-native-haptic-feedback';
 
 type CharactersLisTypes = {
   data: apiDataType;
@@ -34,6 +35,11 @@ const CharactersList = ({data, setOffset}: CharactersLisTypes) => {
   const onReachEnd = useCallback(() => {
     if (data?.offset < data?.total && data?.results?.length !== data?.total) {
       setOffset((prev: number) => prev + data?.count);
+    } else {
+      trigger('impactLight', {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+      });
     }
   }, []);
 

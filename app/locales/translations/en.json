@@ -36,5 +36,8 @@
     "done":"Done",
     "next":"Next",
     "search":"Search",
-    "sponsored_by": "Sponsored by"
+    "sponsored_by": "Sponsored by",
+    "you_sign_out_successfully":"You sign out successfully",
+    "dismiss":"Dismiss",
+    "end_of_list":"End of the list"
 }
