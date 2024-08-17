@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, useColorScheme} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 import {colors} from '@common/colors';
 import store, {persistor} from './store';
@@ -18,17 +18,25 @@ function App(): React.JSX.Element {
           backgroundColor: isDarkMode ? colors.black : colors.white,
         },
       ])}>
-      <SafeAreaView
+      <SafeAreaProvider
         style={StyleSheet.flatten([
           styles.provider,
           {
             backgroundColor: isDarkMode ? colors.black : colors.white,
           },
         ])}>
-        <Provider store={store}>
-          <PersistGateWithContext persistor={persistor} />
-        </Provider>
-      </SafeAreaView>
+        <SafeAreaView
+          style={StyleSheet.flatten([
+            styles.provider,
+            {
+              backgroundColor: isDarkMode ? colors.black : colors.white,
+            },
+          ])}>
+          <Provider store={store}>
+            <PersistGateWithContext persistor={persistor} />
+          </Provider>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
