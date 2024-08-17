@@ -71,7 +71,7 @@ const CharacterCard = memo(({item}: any) => {
                 }
           }
           style={styles.image}
-          sharedTransitionTag="hero"
+          sharedTransitionTag={String(item.id)}
           resizeMode="cover"
           onLoadEnd={handleImageLoad}
         />

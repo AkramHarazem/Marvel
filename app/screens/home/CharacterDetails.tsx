@@ -126,7 +126,7 @@ const CharacterDetails = () => {
           uri: imgUrl?.replace('http://', 'https://'),
         }}
         style={styles.image}
-        sharedTransitionTag="hero"
+        sharedTransitionTag={String(id)}
       />
       {!isFetching && char?.length > 0 && (
         <FlatList

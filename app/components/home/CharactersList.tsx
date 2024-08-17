@@ -47,7 +47,7 @@ const CharactersList = ({data, setOffset}: CharactersLisTypes) => {
         showSnack(t('end_of_list'), t('dismiss'));
       }
     }
-  }, []);
+  }, [data]);
 
   const renderItem = useCallback(
     ({item}: ListItemType) =>
@@ -75,7 +75,7 @@ const CharactersList = ({data, setOffset}: CharactersLisTypes) => {
     <FlatList
       data={cards}
       renderItem={renderItem}
-      keyExtractor={(item, idx) => item?.id + idx}
+      keyExtractor={(item, idx) => String(item?.id + idx)}
       numColumns={Math.max(numColumns, 2)}
       contentContainerStyle={styles.contentContainerStyle}
       columnWrapperStyle={styles.columnWrapperStyle}
